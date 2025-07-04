@@ -8,7 +8,7 @@ CORS(app) # للسماح بالوصول من تطبيق Flutter
 
 # رابط ngrok الخاص بك كمتغير بيئي
 # يجب عليك تعيين هذا المتغير في إعدادات Railway
-NGROK_PUBLIC_URL = os.environ.get("https://1754-156-203-135-116.ngrok-free.app")
+NGROK_PUBLIC_URL = os.environ.get("NGROK_PUBLIC_URL")
 
 @app.route("/chat", methods=["POST"])
 def proxy_chat():
@@ -43,7 +43,3 @@ def proxy_chat():
 @app.route("/health", methods=["GET"])
 def health_check():
     return jsonify({"status": "Gateway is healthy"}), 200
-
-if __name__ == "__main__":
-    # تأكد من أن التطبيق يستمع على 0.0.0.0 لأغراض النشر على Railway
-    app.run(host="0.0.0.0", port=os.environ.get("PORT", 5000))
